@@ -86,7 +86,7 @@ namespace SpecFlow.Tests.Pages
             Actions action = new Actions(driver);
             IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
             action.MoveToElement(tmp).Build().Perform();
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
             AddToCartLink.Click();
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")));

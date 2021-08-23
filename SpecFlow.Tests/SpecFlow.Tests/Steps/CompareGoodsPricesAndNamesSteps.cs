@@ -32,8 +32,7 @@ namespace SpecFlow.Tests.Steps
         [Given(@"User is at the Home Page")]
         public void GivenUserIsAtTheHomePage()
         {
-            
-            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").Setup();
+            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").Setup("edge"); //options: "chrome","firefox","edge".(You can copy and paste it)
             driver.Navigate().GoToUrl(@"http://automationpractice.com/index.php");
             InitPages();
         }
@@ -77,9 +76,10 @@ namespace SpecFlow.Tests.Steps
         [Then(@"Compare the saved values with the Price and Name in the Total column")]
         public void ThenCompareTheSavedValuesWithThePriceAndNameInTheTotalColumn()
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")));
-            Assert.AreEqual(savedValues, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");     
+            Assert.AreEqual(savedValues, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");
+            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").TearDown();
         }
     }
 }

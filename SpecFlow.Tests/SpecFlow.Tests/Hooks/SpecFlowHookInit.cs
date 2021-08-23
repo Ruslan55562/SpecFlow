@@ -11,7 +11,7 @@ namespace SpecFlow.Tests.Hooks
     [Binding]
     public sealed class SpecFlowHookInit
     {
-       
+
         private readonly ScenarioContext _ScenarioContext;
         public SpecFlowHookInit(ScenarioContext scenario) => _ScenarioContext = scenario;
         [BeforeScenario]
