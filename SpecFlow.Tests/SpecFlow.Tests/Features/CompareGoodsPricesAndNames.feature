@@ -6,8 +6,7 @@
 @SHOPPING-CART
 Scenario: Equal prices and product names in Shopping-cart
 	Given User is at the Home Page
-	When  Enter the Summer keyword
-	And   Click on Search icon.
+	When  Enter the Summer keyword and Click on Search icon
 	When  The SUMMER inscription displays above the list of products
 	And   Choose the dropdown option Price: Highest first
 	And   Elements sorts with the choosen option

@@ -33,5 +33,13 @@ namespace SpecFlow.Tests.Pages
 
 
         #endregion
+
+
+        public HomePage SummerHomePageSearch()
+        {
+            SearchField.SendKeys("Summer");
+            SearchButton.Click();
+            return this;
+        }
     }
 }

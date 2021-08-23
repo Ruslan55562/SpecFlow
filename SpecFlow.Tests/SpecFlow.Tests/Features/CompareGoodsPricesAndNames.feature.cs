@@ -107,27 +107,24 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("User is at the Home Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.When("Enter the Summer keyword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Enter the Summer keyword and Click on Search icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
- testRunner.And("Click on Search icon.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
  testRunner.When("The SUMMER inscription displays above the list of products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 12
+#line 11
  testRunner.And("Choose the dropdown option Price: Highest first", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 13
+#line 12
  testRunner.And("Elements sorts with the choosen option", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 14
+#line 13
  testRunner.When("Save full name and price  of the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 14
  testRunner.And("Add it to cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 15
  testRunner.Then("Compare the saved values with the Price and Name in the Total column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
