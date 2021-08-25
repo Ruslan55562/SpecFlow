@@ -18,13 +18,16 @@ namespace SpecFlow.Tests.Pages
 
         #region LOCATORS 
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")] [CacheLookup]
+        [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")]
+        [CacheLookup]
         private IWebElement SearchField { get; set; }
 
-        [FindsBy(How=How.XPath,Using = "//form[@id='searchbox']/button")] [CacheLookup]
+        [FindsBy(How = How.XPath, Using = "//form[@id='searchbox']/button")]
+        [CacheLookup]
         private IWebElement SearchButton { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='header_logo']/a")] [CacheLookup]
+        [FindsBy(How = How.XPath, Using = "//div[@id='header_logo']/a")]
+        [CacheLookup]
         private IWebElement LogoHomeLink { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//div[@class='shopping_cart']/a")]
@@ -35,7 +38,7 @@ namespace SpecFlow.Tests.Pages
         #endregion
 
 
-        public HomePage SummerHomePageSearch()
+        public HomePage SummerHomePageSearch() // The function send the "Summer" word into searchfield and clicks on the "Search" icon.
         {
             SearchField.SendKeys("Summer");
             SearchButton.Click();

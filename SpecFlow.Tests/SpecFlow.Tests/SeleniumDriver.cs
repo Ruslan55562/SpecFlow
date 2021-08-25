@@ -20,7 +20,7 @@ namespace SpecFlow.Drivers
 
         public SeleniumDriver(ScenarioContext scenarioContext) => this.scenarioContext = scenarioContext;
 
-        public IWebDriver Setup(string BrowserName) // посмотреть как реализовывать в желтом видео.
+        public IWebDriver Setup(string BrowserName) // The function takes 1 string param(name of browser) and returns the WebDriver with a specific behaviour.
         {
             if (BrowserName == "chrome")
                 _webDriver = new ChromeDriver();
@@ -44,7 +44,7 @@ namespace SpecFlow.Drivers
             return _webDriver;
         }
 
-        public IWebDriver TearDown()
+        public IWebDriver TearDown() //The function quit the WebDriver if it's not null.
         {
             if (_webDriver != null)
                 _webDriver.Quit();
