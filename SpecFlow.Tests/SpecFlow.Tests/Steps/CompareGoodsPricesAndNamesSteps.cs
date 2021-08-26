@@ -40,7 +40,7 @@ namespace SpecFlow.Tests.Steps
         [When(@"Enter the Summer keyword and Click on Search icon")]
         public void WhenEnterTheSummerKeywordAndClickOnSearchIcon()
         {  
-            Homepage.SummerHomePageSearch();
+            Homepage.HomePageSearch("Summer");
         }
         
         [When(@"The SUMMER inscription displays above the list of products")]
@@ -77,7 +77,7 @@ namespace SpecFlow.Tests.Steps
         public void ThenCompareTheSavedValuesWithThePriceAndNameInTheTotalColumn()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@id='layer_cart']/div[1]")));
             Assert.AreEqual(savedValues, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");
             driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").TearDown();
         }

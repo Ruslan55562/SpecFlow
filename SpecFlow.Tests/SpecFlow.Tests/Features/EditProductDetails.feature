@@ -4,7 +4,7 @@
 
 @mytag
 Scenario: Opportunity to edit product details
-	Given User is at the Home Page
+	Given User is in the Home Page
 	And Enter the 'Blouse' keyword and click on Search icon
 	And Click on the More button of the first product
 	And Set the Quantity = '3', Size = 'L', Color = 'white' details
@@ -15,7 +15,7 @@ Scenario: Opportunity to edit product details
 	And Click on the More button of the first product
 	And Set the Quantity = '5', Size = 'M', Color = 'Orange' details
 	And Click on Add to Cart button
-	When The "Product successfully added to your shopping cart" modal window appears
+	When The "Product successfully added to your shopping cart" modal window appear
 	And Click on "Proceed to checkout" button
 	And Verify the actual details with the expected 
 	And Click on Delete button opposite 'Printed summer dress'

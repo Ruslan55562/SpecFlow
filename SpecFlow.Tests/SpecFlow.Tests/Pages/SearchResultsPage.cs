@@ -12,6 +12,8 @@ namespace SpecFlow.Tests.Pages
     public class SearchResultsPage
     {
         private IWebDriver driver;
+        
+
         public SearchResultsPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -100,17 +102,42 @@ namespace SpecFlow.Tests.Pages
             return values;
         }
 
-        public void AddTheProductToCart() // The function hovers over the first product(after sort) and clicks on the "Add to Cart" button.
+        public SearchResultsPage AddTheProductToCart() // The function hovers over the first product(after sort) and clicks on the "Add to Cart" button.
         {
             Actions action = new Actions(driver);
             IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
             action.MoveToElement(tmp).Build().Perform();
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
             AddToCartLink.Click();
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")));
             ProceedToCheckOutButton.Click();
+            return this;
         }
+
+        public SearchResultsPage ClickOnMoreButton()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
+            Actions action = new Actions(driver);
+            IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
+            action.MoveToElement(tmp).Build().Perform();
+          
+            MoreButtonBlouse.Click();
+            return this;
+        } // Click on More button(For Blouse)
+        public SearchResultsPage ClickOnMoreButtonDress() 
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
+            Actions action = new Actions(driver);
+            IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
+            action.MoveToElement(tmp).Build().Perform();
+
+
+            MoreButtonDress.Click();
+            return this;
+        } //Click on More button (For Dress)
 
         #endregion
     }
