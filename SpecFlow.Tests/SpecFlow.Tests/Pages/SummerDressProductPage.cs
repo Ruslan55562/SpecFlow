@@ -21,7 +21,7 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement DressQuntity { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//select[@id='group_1']/option[.='M']")] //
+        [FindsBy(How = How.XPath, Using = "//select[@id='group_1']/option[.='M']")] 
         [CacheLookup]
         private IWebElement DressSize { get; set; }
 
@@ -33,7 +33,7 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement AddToCartButtonDressPage { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//h2[contains(.,'Product successfully added to your shopping cart')]")] //
+        [FindsBy(How = How.XPath, Using = "//h2[contains(.,'Product successfully added to your shopping cart')]")] 
         [CacheLookup]
         private IWebElement SuccessfulAddInscription { get; set; }
         [FindsBy(How = How.XPath, Using = "//a[@title='Proceed to checkout']")]
@@ -55,14 +55,14 @@ namespace SpecFlow.Tests.Pages
         #endregion
 
         #region FUNCTIONS
-        public SummerDressProductPage ChooseDetailsDress(int quantity)
+        public SummerDressProductPage ChooseDetailsDress(int quantityOfDresses)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//select[@id='group_1']")));
             DressQuntity.Clear();
-            DressQuntity.SendKeys(quantity.ToString());
+            DressQuntity.SendKeys(quantityOfDresses.ToString());
             DressSize.Click();
-            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[.='M']"))); //
+            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[.='M']"))); 
             DressColor.Click();
             return this;
         }
@@ -76,7 +76,7 @@ namespace SpecFlow.Tests.Pages
         public string InscriptionContain() //Return the inscription that appears after the successful adding the blouse to the cart.
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//h2[contains(.,'Product successfully added to your shopping cart')]"))); //
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//h2[contains(.,'Product successfully added to your shopping cart')]"))); 
 
             return SuccessfulAddInscription.Text;
         }

@@ -34,7 +34,7 @@ namespace SpecFlow.Tests.Pages
         #region LOCATORS(SecondScenario)
         [FindsBy(How = How.XPath, Using = "//span[@id='product_price_2_12_0']/span")]
         private IWebElement BlousePriceInCart { get; set; }
-        [FindsBy(How = How.XPath, Using = "//p/a[.='Blouse']")] //
+        [FindsBy(How = How.XPath, Using = "//p/a[.='Blouse']")] 
         private IWebElement BlouseNameInCart { get; set; }
         [FindsBy(How = How.XPath, Using = "//input[@name='quantity_2_12_0_0']")]
         private IWebElement BlouseQuantityInCart { get; set; }
@@ -81,7 +81,7 @@ namespace SpecFlow.Tests.Pages
             return this;
         }
 
-        public bool DressIsInTheCart() // The function returns true if the total price of products == total price of Blouse and returns false they aren't equal.
+        public bool OnlyDressIsInTheCart()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//tr[@id='product_5_25_0_0']")));

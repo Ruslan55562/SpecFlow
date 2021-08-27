@@ -40,7 +40,7 @@ namespace SpecFlow.Tests.Pages
         #endregion
 
 
-        public HomePage HomePageSearch(string word) // The function send the word into searchfield and clicks on the "Search" icon.
+        public HomePage HomePageSearch(string word)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@id='search_query_top']")));

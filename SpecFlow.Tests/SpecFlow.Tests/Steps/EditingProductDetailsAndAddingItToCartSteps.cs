@@ -136,7 +136,7 @@ namespace SpecFlow.Tests.Steps
         [Then(@"Only Blouse product displays")]
         public void ThenOnlyBlouseProductDisplays()
         {
-            Assert.IsTrue(Cartpage.DressIsInTheCart());
+            Assert.IsTrue(Cartpage.OnlyDressIsInTheCart());
             driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").TearDown();
         }
     }

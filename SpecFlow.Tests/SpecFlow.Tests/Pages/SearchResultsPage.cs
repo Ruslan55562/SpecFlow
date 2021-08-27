@@ -53,26 +53,26 @@ namespace SpecFlow.Tests.Pages
 
 
         #region PricesOfProducts
-        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$28.98')]")] //
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$28.98')]")] 
         [CacheLookup]
         private IWebElement PriceOfFirstProductWithDiscount { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.51')]")] //
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.51')]")] 
         [CacheLookup]
         private IWebElement PriceOfFirstProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.50')]")] //
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.50')]")] 
         [CacheLookup]
         private IWebElement PriceOfSecondProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$20.50')]")] //
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$20.50')]")] 
         [CacheLookup]
         private IWebElement PriceOfThirdProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$16.51')]")] //
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$16.51')]")] 
         [CacheLookup]
         private IWebElement PriceOfFourthProduct { get; set; }
 
@@ -104,12 +104,12 @@ namespace SpecFlow.Tests.Pages
         public SearchResultsPage AddTheProductToCart() // The function hovers over the first product(after sort) and clicks on the "Add to Cart" button.
         {
             Actions action = new Actions(driver);
-            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); //
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); 
             action.MoveToElement(ProductBlock).Build().Perform();
            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(FirstProductBlockXPath))); //
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(FirstProductBlockXPath))); 
             AddToCartLink.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@title='Proceed to checkout']"))); //
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@title='Proceed to checkout']"))); 
             ProceedToCheckOutButton.Click();
             return this;
         }
@@ -117,9 +117,9 @@ namespace SpecFlow.Tests.Pages
         public SearchResultsPage ClickOnMoreButton()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); //
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); 
             Actions action = new Actions(driver);
-            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); //
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); 
             action.MoveToElement(ProductBlock).Build().Perform();
           
             MoreButtonBlouse.Click();
@@ -128,9 +128,9 @@ namespace SpecFlow.Tests.Pages
         public SearchResultsPage ClickOnMoreButtonDress() 
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); //
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); 
             Actions action = new Actions(driver);
-            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); // 
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); 
             action.MoveToElement(ProductBlock).Build().Perform();
 
 

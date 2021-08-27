@@ -55,12 +55,12 @@ namespace SpecFlow.Tests.Pages
 
 
 
-        public BlouseProductPage ChooseDetailsBlouse(int quantity) 
+        public BlouseProductPage ChooseDetailsBlouse(int quantityOfBlouses) 
         { 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//select[@id='group_1']")));
             QuantityInputField.Clear();
-            QuantityInputField.SendKeys(quantity.ToString());
+            QuantityInputField.SendKeys(quantityOfBlouses.ToString());
             SelectedSize.Click();
             wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[.='L']"))); 
             SelectedColor.Click();
