@@ -4,19 +4,19 @@
 
 @mytag
 Scenario: Opportunity to edit product details
-	Given User is in the Home Page
+	Given User choose browser and move to the Home Page
 	And Enter the 'Blouse' keyword and click on Search icon
 	And Click on the More button of the first product
-	And Set the Quantity = '3', Size = 'L', Color = 'white' details
+	And Set the Quantity = '3', Size = L , Color = white, details
 	And Click on Add to Cart button
 	When The "Product successfully added to your shopping cart" modal window appears
 	And Click on Continue Shopping button
 	And Enter the 'Printed summer dress' keyword and click on Search icon
 	And Click on the More button of the first product
-	And Set the Quantity = '5', Size = 'M', Color = 'Orange' details
+	And Set the Quantity = '5', Size = M, Color = Orange, details
 	And Click on Add to Cart button
 	When The "Product successfully added to your shopping cart" modal window appear
-	And Click on "Proceed to checkout" button
+	And Click on Proceed to checkout button
 	And Verify the actual details with the expected 
-	And Click on Delete button opposite 'Printed summer dress'
-	Then Only 'Blouse' product displays
+	And Click on Delete button opposite Printed summer dress
+	Then Only Blouse product displays

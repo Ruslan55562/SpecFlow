@@ -12,7 +12,9 @@ namespace SpecFlow.Tests.Pages
     public class SearchResultsPage
     {
         private IWebDriver driver;
-        
+        const string FirstProductBlockXPath = "//ul[@class='product_list grid row']/li[1]";
+
+
 
         public SearchResultsPage(IWebDriver driver)
         {
@@ -27,7 +29,7 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement SearchResult { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//select[@id='selectProductSort']/option[3]")]
+        [FindsBy(How = How.XPath, Using = "//option[.='Price: Highest first']")]
         [CacheLookup]
         private IWebElement SortByHighestPrice { get; set; }
 
@@ -35,42 +37,42 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement AddToCartLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//li[1]/div[@class='product-container']/div[2]/h5/a")]
+        [FindsBy(How = How.XPath, Using = "//ul[@class='product_list grid row']/li[1]/descendant::a[@class='product-name']")] 
         [CacheLookup]
         private IWebElement TheProductName { get; set; }
-        [FindsBy(How = How.XPath, Using = "//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")]
+        [FindsBy(How = How.XPath, Using = "//a[@title='Proceed to checkout']")]
         [CacheLookup]
         private IWebElement ProceedToCheckOutButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//a[@title='View']")]
         [CacheLookup]
         private IWebElement MoreButtonBlouse { get; set; }
-        [FindsBy(How=How.XPath,Using = "//div[@id='center_column']/ul/li[1]/div/div[2]/div[2]/a[2]")][CacheLookup]
+        [FindsBy(How=How.XPath,Using = "//ul[@class='product_list grid row']/li[1]/descendant::a[@title='View']")][CacheLookup]
          private IWebElement MoreButtonDress { get; set; }
 
 
 
         #region PricesOfProducts
-        [FindsBy(How = How.XPath, Using = "//li[1]/div/div[2]/div[@itemprop='offers']/span[1]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$28.98')]")] //
         [CacheLookup]
         private IWebElement PriceOfFirstProductWithDiscount { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//li[1]/div/div[2]/div[@itemprop='offers']/span[2]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.51')]")] //
         [CacheLookup]
         private IWebElement PriceOfFirstProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//li[2]/div/div[2]/div[@itemprop='offers']/span")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$30.50')]")] //
         [CacheLookup]
         private IWebElement PriceOfSecondProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//li[3]/div/div[2]/div[@itemprop='offers']/span[2]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$20.50')]")] //
         [CacheLookup]
         private IWebElement PriceOfThirdProduct { get; set; }
 
 
-        [FindsBy(How = How.XPath, Using = "//li[4]/div/div[2]/div[@itemprop='offers']/span")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='right-block']/descendant::span[contains(text(),'$16.51')]")] //
         [CacheLookup]
         private IWebElement PriceOfFourthProduct { get; set; }
 
@@ -79,38 +81,35 @@ namespace SpecFlow.Tests.Pages
 
 
         #region FUNCTIONS
-        public List<string> PricesSort() // The function returns List<string> that contains Actual prices of products without discount.
+        public List<string> PricesSort() // The function returns List<string> that contains ACTUAL prices of products without discount.(first Scenario)
         {
-            List<string> ActualSort = new List<string> { PriceOfFirstProduct.Text, PriceOfSecondProduct.Text, PriceOfThirdProduct.Text, PriceOfFourthProduct.Text };
-            return ActualSort;
+            return new List<string> { PriceOfFirstProduct.Text, PriceOfSecondProduct.Text, PriceOfThirdProduct.Text, PriceOfFourthProduct.Text }; ;
         }
 
-        public string IsSearchRequestHere() // returns Text of SearchRequest
+        public string IsSearchRequestHere()
         {
             return SearchResult.Text;
         }
 
-        public SearchResultsPage SelectHighestOptionSearch() // The function selects option "Price: Highest first"
+        public SearchResultsPage SelectHighestOptionSearch()
         {
             SortByHighestPrice.Click();
-
             return this;
         }
         public List<string> PriceAndNameofFirstProduct() // The function returns the List<string> that contains the name and price of the first product(after the sort)
         {
-            List<string> values = new List<string> { TheProductName.Text, PriceOfFirstProductWithDiscount.Text };
-            return values;
+            return new List<string> { TheProductName.Text, PriceOfFirstProductWithDiscount.Text }; 
         }
 
         public SearchResultsPage AddTheProductToCart() // The function hovers over the first product(after sort) and clicks on the "Add to Cart" button.
         {
             Actions action = new Actions(driver);
-            IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
-            action.MoveToElement(tmp).Build().Perform();
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); //
+            action.MoveToElement(ProductBlock).Build().Perform();
            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(FirstProductBlockXPath))); //
             AddToCartLink.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='layer_cart']/div[1]/div[2]/div[4]/a")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@title='Proceed to checkout']"))); //
             ProceedToCheckOutButton.Click();
             return this;
         }
@@ -118,26 +117,26 @@ namespace SpecFlow.Tests.Pages
         public SearchResultsPage ClickOnMoreButton()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); //
             Actions action = new Actions(driver);
-            IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
-            action.MoveToElement(tmp).Build().Perform();
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); //
+            action.MoveToElement(ProductBlock).Build().Perform();
           
             MoreButtonBlouse.Click();
             return this;
-        } // Click on More button(For Blouse)
+        } 
         public SearchResultsPage ClickOnMoreButtonDress() 
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div")));
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(FirstProductBlockXPath))); //
             Actions action = new Actions(driver);
-            IWebElement tmp = driver.FindElement(By.XPath("//div[@id='center_column']/ul/li[1]/div/div[1]/div"));
-            action.MoveToElement(tmp).Build().Perform();
+            IWebElement ProductBlock = driver.FindElement(By.XPath(FirstProductBlockXPath)); // 
+            action.MoveToElement(ProductBlock).Build().Perform();
 
 
             MoreButtonDress.Click();
             return this;
-        } //Click on More button (For Dress)
+        } 
 
         #endregion
     }

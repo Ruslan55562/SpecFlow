@@ -21,7 +21,7 @@ namespace SpecFlow.Tests.Pages
         [FindsBy(How=How.XPath,Using = "//input[@id='quantity_wanted']")][CacheLookup]
         private IWebElement QuantityInputField { get; set; }
 
-        [FindsBy(How=How.XPath,Using = "//select[@id='group_1']/option[3]")][CacheLookup]
+        [FindsBy(How=How.XPath,Using = "//select[@id='group_1']/option[.='L']")][CacheLookup] 
         private IWebElement SelectedSize { get; set; }
 
         [FindsBy(How=How.XPath,Using = "//a[@id='color_8']")][CacheLookup]
@@ -29,7 +29,7 @@ namespace SpecFlow.Tests.Pages
         [FindsBy(How=How.XPath,Using = "//button[@class='exclusive']")][CacheLookup]
         private IWebElement AddToCartButton { get; set; }
 
-        [FindsBy(How=How.XPath,Using = "//div[@class='clearfix']/div[1]/h2")][CacheLookup]
+        [FindsBy(How=How.XPath,Using = "//h2[contains(.,'Product successfully added to your shopping cart')]")][CacheLookup] 
         private IWebElement ProductAddedInscription { get; set; }
 
         [FindsBy(How=How.XPath,Using = "//span[@title='Continue shopping']")][CacheLookup]
@@ -46,26 +46,27 @@ namespace SpecFlow.Tests.Pages
         private IWebElement BlouseQuantity { get; set; }
         [FindsBy(How = How.XPath, Using = "//span[@id='layer_cart_product_price']")]
         private IWebElement BlouseTotalPrice { get; set; }
+        [FindsBy(How = How.XPath, Using = " //span[@id='our_price_display']")]
+        private IWebElement BlousePrice { get; set; }
         #endregion
 
+       
 
 
 
 
-
-        public BlouseProductPage ChooseDetailsBlouse(int quantity) // Choose quantity,color and size of the blouse.
+        public BlouseProductPage ChooseDetailsBlouse(int quantity) 
         { 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//select[@id='group_1']")));
             QuantityInputField.Clear();
             QuantityInputField.SendKeys(quantity.ToString());
             SelectedSize.Click();
-            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[3]")));
+            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[.='L']"))); 
             SelectedColor.Click();
-           // wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//a[@id='color_8']")));
             return this;
         }
-        public BlouseProductPage ClickOnAddToCart() //Click on add to cart button in the BlouseProductPage
+        public BlouseProductPage ClickOnAddToCart()
         {
             AddToCartButton.Click();
             return this;
@@ -73,22 +74,22 @@ namespace SpecFlow.Tests.Pages
         public string InscriptionContain() //Return the inscription that appears after the successful adding the blouse to the cart.
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='clearfix']/div[1]/h2")));
-           
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//h2[contains(.,'Product successfully added to your shopping cart')]"))); 
             return ProductAddedInscription.Text;
         }
-        public BlouseProductPage ClickOnContinueShopping() //Click on the continue shopping button after the successful adding the blouse to the cart.
+        public BlouseProductPage ClickOnContinueShopping() 
         {
-            //var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-           // wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[@title='Continue shopping']")));
             ContinueShoppingButton.Click();
             return this;
         }
 
-        public List<string> ActualDetailsBlouse() // Returns List that contains actual details about the Blouse.
+        public List<string> ActualDetailsBlouse() // Returns List that contains ACTUAL details about the Blouse.
+        {  
+            return new List<string> { OneBlousePrice(), BlouseName.Text, BlouseColorAndSize.Text, BlouseQuantity.Text, BlouseTotalPrice.Text }; ;
+        }
+        public string OneBlousePrice()
         {
-            List<string> tmp = new List<string> {"$27.00", BlouseName.Text, BlouseColorAndSize.Text, BlouseQuantity.Text, BlouseTotalPrice.Text};
-            return tmp;
+            return BlousePrice.Text;
         }
 
     }

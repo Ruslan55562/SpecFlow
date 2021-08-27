@@ -21,32 +21,31 @@ namespace SpecFlow.Tests.Steps
         public HomePage Homepage;
         private readonly ScenarioContext _scenarioContext;
         public CompareGoodsPricesAndNamesSteps(ScenarioContext _scenario) => _scenarioContext = _scenario;
-        List<string> savedValues;
+        List<string> savedValuesOfPriceAndName;
         public void InitPages()
         {
             SearchPage = new SearchResultsPage(driver);
             Homepage = new HomePage(driver);
             Cartpage = new CartPage(driver);
         }
-
-        [Given(@"User is at the Home Page")]
-        public void GivenUserIsAtTheHomePage()
+        [Given(@"User choose browser and move to the Main Page")]
+        public void GivenUserChooseBrowserAndMoveToTheMainPage()
         {
-            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").Setup("edge"); //options: "chrome","firefox","edge".(You can copy and paste it)
-            driver.Navigate().GoToUrl(@"http://automationpractice.com/index.php");
+            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").Setup("edge"); //options: "chrome","firefox","edge".
+            driver.Navigate().GoToUrl(HomePage.SiteUrl);
             InitPages();
         }
         
-        [When(@"Enter the Summer keyword and Click on Search icon")]
-        public void WhenEnterTheSummerKeywordAndClickOnSearchIcon()
-        {  
-            Homepage.HomePageSearch("Summer");
+        [When(@"Enter the '(.*)' keyword and Click on Search icon")]
+        public void WhenEnterTheKeywordAndClickOnSearchIcon(string SummerKeyword)
+        {
+            Homepage.HomePageSearch(SummerKeyword);
         }
         
         [When(@"The SUMMER inscription displays above the list of products")]
         public void WhenTheSUMMERInscriptionDisplaysAboveTheListOfProducts()
         {
-            Assert.AreEqual("\"SUMMER\"",SearchPage.IsSearchRequestHere(),"The inscription is not as requested");
+            Assert.AreEqual("\"SUMMER\"", SearchPage.IsSearchRequestHere(), "The inscription is not as requested");
         }
         
         [When(@"Choose the dropdown option Price: Highest first")]
@@ -64,7 +63,7 @@ namespace SpecFlow.Tests.Steps
         [When(@"Save full name and price  of the first product")]
         public void WhenSaveFullNameAndPriceOfTheFirstProduct()
         {
-            savedValues = SearchPage.PriceAndNameofFirstProduct();
+            savedValuesOfPriceAndName = SearchPage.PriceAndNameofFirstProduct();
         }
         
         [When(@"Add it to cart")]
@@ -78,19 +77,8 @@ namespace SpecFlow.Tests.Steps
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@id='layer_cart']/div[1]")));
-            Assert.AreEqual(savedValues, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");
+            Assert.AreEqual(savedValuesOfPriceAndName, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");
             driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").TearDown();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

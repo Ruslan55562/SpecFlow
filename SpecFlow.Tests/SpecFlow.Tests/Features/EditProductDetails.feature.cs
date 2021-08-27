@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.Given("User is in the Home Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("User choose browser and move to the Home Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
  testRunner.And("Enter the \'Blouse\' keyword and click on Search icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -112,7 +112,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("Click on the More button of the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
- testRunner.And("Set the Quantity = \'3\', Size = \'L\', Color = \'white\' details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Set the Quantity = \'3\', Size = L , Color = white, details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
  testRunner.And("Click on Add to Cart button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -130,7 +130,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("Click on the More button of the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
- testRunner.And("Set the Quantity = \'5\', Size = \'M\', Color = \'Orange\' details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Set the Quantity = \'5\', Size = M, Color = Orange, details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
  testRunner.And("Click on Add to Cart button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -139,16 +139,16 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("The \"Product successfully added to your shopping cart\" modal window appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
- testRunner.And("Click on \"Proceed to checkout\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Click on Proceed to checkout button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 20
  testRunner.And("Verify the actual details with the expected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 21
- testRunner.And("Click on Delete button opposite \'Printed summer dress\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Click on Delete button opposite Printed summer dress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 22
- testRunner.Then("Only \'Blouse\' product displays", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Only Blouse product displays", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

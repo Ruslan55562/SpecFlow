@@ -21,7 +21,7 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement DressQuntity { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//select[@id='group_1']/option[2]")]
+        [FindsBy(How = How.XPath, Using = "//select[@id='group_1']/option[.='M']")] //
         [CacheLookup]
         private IWebElement DressSize { get; set; }
 
@@ -33,7 +33,7 @@ namespace SpecFlow.Tests.Pages
         [CacheLookup]
         private IWebElement AddToCartButtonDressPage { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='clearfix']/div[1]/h2")]
+        [FindsBy(How = How.XPath, Using = "//h2[contains(.,'Product successfully added to your shopping cart')]")] //
         [CacheLookup]
         private IWebElement SuccessfulAddInscription { get; set; }
         [FindsBy(How = How.XPath, Using = "//a[@title='Proceed to checkout']")]
@@ -49,25 +49,25 @@ namespace SpecFlow.Tests.Pages
         private IWebElement TotalProductPrice { get; set; }
         [FindsBy(How=How.XPath,Using = "//span[@id='layer_cart_product_quantity']")]
         private IWebElement QuantityOfProduct { get; set; }
-
+        [FindsBy(How = How.XPath, Using = "//span[@id='our_price_display']")]
+        private IWebElement DressPrice { get; set; }
 
         #endregion
 
         #region FUNCTIONS
-        public SummerDressProductPage ChooseDetailsDress(int quantity) // Choose quantity,color and size of the dress.
+        public SummerDressProductPage ChooseDetailsDress(int quantity)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//select[@id='group_1']")));
             DressQuntity.Clear();
             DressQuntity.SendKeys(quantity.ToString());
             DressSize.Click();
-            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[2]")));
+            wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//select[@id='group_1']/option[.='M']"))); //
             DressColor.Click();
-            // wait.Until(ExpectedConditions.ElementToBeSelected(By.XPath("//a[@id='color_8']")));
             return this;
         }
 
-        public SummerDressProductPage ClickOnAddToCart() //Click on add to cart button in the DressPage.
+        public SummerDressProductPage ClickOnAddToCart()
         {
             AddToCartButtonDressPage.Click();
             return this;
@@ -76,22 +76,24 @@ namespace SpecFlow.Tests.Pages
         public string InscriptionContain() //Return the inscription that appears after the successful adding the blouse to the cart.
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='clearfix']/div[1]/h2")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//h2[contains(.,'Product successfully added to your shopping cart')]"))); //
 
             return SuccessfulAddInscription.Text;
         }
 
-        public SummerDressProductPage ClickOnProceedButton() //Click on the Proceed  button after the successful adding the blouse to the cart.
+        public SummerDressProductPage ClickOnProceedButton()
         {
             ProceedToCheckoutButton.Click();
             return this;
         }
 
-        public List<string> ActualDressDetails() //Returns the List that contains actual details of the product.
+        public List<string> ActualDressDetails() //Returns the List that contains ACTUAL details of the product.
         {
-            List<string> tmp = new List<string> { "$28.98", DressName.Text, ColorAndSizeAfterAdding.Text, QuantityOfProduct.Text, TotalProductPrice.Text };
-            return tmp;
-
+          return new List<string> { OneDressPrice(), DressName.Text, ColorAndSizeAfterAdding.Text, QuantityOfProduct.Text, TotalProductPrice.Text }; 
+        }
+        public string OneDressPrice()
+        {
+            return DressPrice.Text;
         }
 
         #endregion

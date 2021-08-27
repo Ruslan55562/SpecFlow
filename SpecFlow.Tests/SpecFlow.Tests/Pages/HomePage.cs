@@ -9,6 +9,8 @@ namespace SpecFlow.Tests.Pages
 {
     public class HomePage
     {
+        public const string SiteUrl = "http://automationpractice.com/index.php";
+
         private IWebDriver driver;
         public HomePage(IWebDriver driver)
         {
@@ -38,11 +40,10 @@ namespace SpecFlow.Tests.Pages
         #endregion
 
 
-        public HomePage HomePageSearch(string word) // The function send the  word into searchfield and clicks on the "Search" icon.
+        public HomePage HomePageSearch(string word) // The function send the word into searchfield and clicks on the "Search" icon.
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@id='search_query_top']")));
-           // SearchField.Clear();
             SearchField.SendKeys(word);
             SearchButton.Click();
             return this;
