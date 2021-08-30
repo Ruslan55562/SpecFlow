@@ -54,14 +54,5 @@ namespace SpecFlow.Drivers
             return _webDriver;
         }
 
-        public IWebDriver TearDown() //The function quit the WebDriver if it's not null.
-        {
-            if (_webDriver != null)
-                _webDriver.Quit();
-
-            return _webDriver;
-        }
-
-
     }
 }

@@ -78,7 +78,6 @@ namespace SpecFlow.Tests.Steps
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@id='layer_cart']/div[1]")));
             Assert.AreEqual(savedValuesOfPriceAndName, Cartpage.ActualNameAndPrice(), "The actual Name or Price isn't such as expected");
-            driver = _scenarioContext.Get<SeleniumDriver>("SeleniumDriver").TearDown();
         }
     }
 }
